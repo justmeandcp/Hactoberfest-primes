@@ -1,34 +1,27 @@
 #include <bits/stdc++.h>
+
 using namespace std;
-void fun() {
 
-#ifndef ONLINE_JUDGE
-
-freopen("input.txt", "r", stdin);
-
-freopen("output.txt", "w", stdout);
-
-#endif // ONLINE_JUDGE
-}
 int main() {    
-fun();
+
 int n;
 cin>>n;
-int i,j;
-for(i=1;i<n;i++)
-{
-    int c=0;
-for(j=1;j<=i;j++)
-{
-    if(i%j==0)
-        c++;
-}
-if(c==2)
-cout<<i<<endl;
+
+vector<bool> is_prime(n+1, true);
+is_prime[0] = is_prime[1] = false;
+for (int i = 2; i <= n; i++) {
+    if (is_prime[i] && (long long)i * i <= n) {
+        for (int j = i * i; j <= n; j += i)
+            is_prime[j] = false;
+    }
 }
 
+for(int i=1;i<=n;i++)
+{
+    if(is_prime[i])
+        cout<<i<<endl;
 
-    
+}
    
     return 0;
 }
